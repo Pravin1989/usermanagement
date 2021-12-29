@@ -17,12 +17,16 @@ var (
 	handleGetUserDetails = handlers.HandleGetUserDetails
 )
 
+const (
+	port = 8080
+)
+
 func Start(context context.Context) {
 	transactionID := config.TransactionIDFromContext(context)
 	router := loadRoutes()
 	log.Printf("Starting REST Server, TransactionID : %v", transactionID)
-	log.Printf("REST server listening on port %d", 8080)
-	err := http.ListenAndServe(":8090", removeTrailingSlash(router))
+	log.Printf("REST server listening on port %d", port)
+	err := http.ListenAndServe(fmt.Sprintf(":%d", port), removeTrailingSlash(router))
 	fmt.Println("Server Crashed", err)
 }
 

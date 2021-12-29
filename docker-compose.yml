@@ -1,9 +1,15 @@
-version: "3.9"
-services:
-  app:
-    build:
-      dockerfile: src/Dockerfile
-      context: .
-      target: dev
-    volumes:
-      - .:/opt/app/api
+version: '3.1'
+services:    
+    usermanagement-service:
+        build:
+          context: .
+          dockerfile: src/Dockerfile          
+        image: usermanagement-service      
+        ports: 
+            - "8080:8080"
+    database:
+      image: postgres:11.14-alpine
+      restart: always
+      environment:
+        POSTGRES_PASSWORD: user123
+        POSTGRES_USER: pravin123

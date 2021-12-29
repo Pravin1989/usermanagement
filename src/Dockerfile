@@ -1,8 +1,21 @@
-FROM golang:1.16 as base
+FROM golang:1.16-alpine
 
-FROM base as dev
+# Set the Current Working Directory inside the container
+WORKDIR /usermanagement-service
 
-RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+# Copy go mod and sum files
+COPY go.mod go.sum ./
 
-WORKDIR /opt/app/api
-CMD ["air"]
+# Download all dependencies.
+RUN go mod download
+
+# Copy the source from the current directory to the Working Directory inside the container
+COPY . .
+
+EXPOSE 8080
+
+# Build the Go app
+RUN go build -o usermanagement ./src/
+
+# Command to run the executable
+ENTRYPOINT [ "/usermanagement-service/usermanagement" ]
