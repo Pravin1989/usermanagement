@@ -10,6 +10,7 @@ import (
 func main() {
 	ctx := config.StartupContext()
 	if err := db.LoadConnection(); err != nil {
+		log.Println("Error : ", err)
 		log.Fatalf("Failed to connect to DB %v", err)
 		return
 	}

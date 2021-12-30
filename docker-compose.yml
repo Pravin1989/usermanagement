@@ -7,9 +7,14 @@ services:
         image: usermanagement-service      
         ports: 
             - "8080:8080"
+        depends_on:
+           - database
+           
     database:
       image: postgres:11.14-alpine
       restart: always
       environment:
         POSTGRES_PASSWORD: user123
         POSTGRES_USER: pravin123
+      ports:
+        - "5432:5432"
