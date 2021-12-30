@@ -18,3 +18,7 @@ func GetUserDetailsById(userId models.UserId) (models.User, error) {
 	}
 	return user, nil
 }
+
+func SaveUserDetails(user models.User) (models.User, error) {
+	return user, nil
+}

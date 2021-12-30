@@ -1,6 +1,7 @@
 package models
 
 import (
+	"ecommerce/user/usermanagement/src/utilities"
 	"time"
 )
 
@@ -35,4 +36,17 @@ type UserId struct {
 type ChangeTrackingSupport struct {
 	ChangeTrackingSupportUser
 	ChangeTrackingSupportDate
+}
+
+func (request *UserRequest) ToUser() User {
+	user := User{}
+	user.UserId = UserId{utilities.GenerateUUID().String()}
+	user.FirstName = request.FirstName
+	user.LastName = request.LastName
+	user.Salary = request.Salary
+	user.Address = request.Address
+	user.Designation = request.Designation
+	user.CreatedBy = "SYSTEM"
+	user.UpdatedBy = "SYSTEM"
+	return user
 }
