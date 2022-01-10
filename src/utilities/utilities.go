@@ -27,5 +27,5 @@ func DecodeRequest(r *http.Request, object interface{}) error {
 }
 
 func GenerateUUID() uuid.UUID {
-	return uuid.UUID{}
+	return uuid.New()
 }

@@ -1,7 +1,6 @@
 package models
 
 import (
-	"ecommerce/user/usermanagement/src/utilities"
 	"time"
 )
 
@@ -40,7 +39,6 @@ type ChangeTrackingSupport struct {
 
 func (request *UserRequest) ToUser() User {
 	user := User{}
-	user.UserId = UserId{utilities.GenerateUUID().String()}
 	user.FirstName = request.FirstName
 	user.LastName = request.LastName
 	user.Salary = request.Salary
